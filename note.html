@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fancy Notes Editor</title>
+  <!-- Default favicon -->
+  <link id="favicon" rel="icon" href="notepad.png" type="image/png">
+<script>
+function haha() {
+  // Heading characters
+  let heading = document.getElementById("divyy");
+  let text = heading.value;
+  document.getElementById("charCountheading").textContent = "Characters of heading: " + text.length;
+
+  // Change heading color based on length
+  if(text.length < 5) heading.style.color = "#4a00e0"; 
+  else if(text.length < 10) heading.style.color = "#ff4500"; 
+  else if(text.length < 20) heading.style.color = "#008080"; 
+  else heading.style.color = "#800080";
+  // Glow heading while typing
+  if(text.length > 0) {
+    heading.style.boxShadow = "0 0 20px rgba(255,69,0,0.7)";
+  } else {
+    heading.style.boxShadow = "0 0 8px rgba(0,0,0,0.1)";
+  }
+
+  // Textarea characters
+  let textarea = document.getElementById("inputs");
+  let text2 = textarea.value;
+  document.getElementById("charCount").textContent = "Characters: " + text2.length;
+
+  // Glow textarea while typing
+  if(text2.length > 0) {
+    textarea.style.boxShadow = "0 0 20px rgba(74,0,224,0.6)";
+  } else {
+    textarea.style.boxShadow = "0 0 8px rgba(0,0,0,0.1)";
+  }
+
+  // Total characters
+  document.getElementById("totalchar").textContent = "Total Characters: " + (text.length + text2.length);
+}
+
+function resetForm() {
+  let heading = document.getElementById("divyy");
+  let textarea = document.getElementById("inputs");
+  heading.value = "Heading";
+  heading.style.boxShadow = "0 0 8px rgba(0,0,0,0.1)";
+  textarea.value = "";
+  textarea.style.boxShadow = "0 0 8px rgba(0,0,0,0.1)";
+  haha();
+}
+
+function setfontsize() {
+  let size = document.getElementById("fontsizeselect").value;
+  let heading = document.getElementById("divyy");
+  let textarea = document.getElementById("inputs");
+
+  // Remove previous size classes
+  heading.classList.remove("small","medium","large");
+  textarea.classList.remove("small","medium","large");
+
+  if(size) {
+    heading.classList.add(size);
+    textarea.classList.add(size);
+  }
+
+  document.getElementById("font-size-display").style.display = "none";
+}
+function setColor() {
+  let color = document.getElementById("colorPicker").value;
+  document.getElementById("divyy").style.color = color;
+  document.getElementById("inputs").style.color = color;
+}
+
+function setfontfamily() {
+  let family = document.getElementById("fontfamilyselect").value;
+  document.getElementById("inputs").style.fontFamily = family;
+  document.getElementById("divyy").style.fontFamily = family;
+  document.getElementById("font-family-display").style.display = "none";
+}
+
+function haen() {
+  let time = new Date();
+  document.getElementById("time").textContent = time.toLocaleDateString() + " " + time.toLocaleTimeString();
+  setTimeout(haen, 1000);
+}
+</script>
+<style>
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #f9f9f9, #e0e0ff);
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+#time {
+  text-align: right;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+#printme {
+  background: #fff;
+  padding: 25px 35px;
+  border-radius: 15px;
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
+  max-width: 900px;
+  margin: auto;
+  transition: all 0.3s;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 2px #aaa;
+  transition: all 0.3s ease;
+}
+
+/* Heading and textarea font sizes */
+textarea.small, #divyy.small { font-size: 14px; }
+textarea.medium, #divyy.medium { font-size: 18px; }
+textarea.large, #divyy.large { font-size: 24px; }
+
+select, input[type="text"], textarea, button {
+  border-radius: 8px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  outline: none;
+  margin: 5px 0;
+  font-size: 1rem;
+  transition: 0.3s all;
+}
+
+select:hover, input:hover, textarea:hover {
+  border-color: #4a00e0;
+  box-shadow: 0px 0px 8px rgba(74,0,224,0.2);
+}
+
+button {
+  background: #4a00e0;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 10px;
+  border: none;
+}
+
+button:hover {
+  background: #6a2bff;
+  transform: scale(1.05);
+}
+
+#inputs {
+  width: 100%;
+  height: 12cm;
+  padding: 10px;
+  resize: vertical;
+  border: 2px solid #ccc;
+  transition: 0.3s box-shadow, 0.3s font-size;
+}
+
+#divyy {
+  width: 100%;
+  margin-bottom: 15px;
+  font-weight: bold;
+  border: 2px solid #ccc;
+  padding: 8px;
+  transition: 0.3s box-shadow, 0.3s font-size, 0.3s color;
+}
+
+#bad p, #totalchar {
+  font-weight: bold;
+  color: #555;
+}
+
+@media print {
+  #onm, #onm2, #onm3, #time, #fontfamilyselect, #fontsizeselect, #bad {
+    display: none;
+  }
+  textarea, input {
+    border: 0;
+  }
+}
+
+/* Fancy spelling error */
+::spelling-error {
+  color: red;
+  font-weight: bold;
+  text-decoration: underline wavy red;
+}
+</style>
+</head>
+<body onload="haen()">
+<time id="time"></time>
+
+<div id="printme">
+  <h1 id="onm3">Notes</h1>
+
+  <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px;">
+    <select id="fontsizeselect" onchange="setfontsize()">
+      <option id="font-size-display">Font Size</option>
+      <option value="small">Small</option>
+      <option value="medium">Medium</option>
+      <option value="large">Large</option>
+    </select>
+
+    <select id="fontfamilyselect" onchange="setfontfamily()">
+      <option id="font-family-display">Font Family</option>
+      <option value="Arial, Helvetica, sans-serif">Arial</option>
+      <option value="'Times New Roman', Times, serif">Times New Roman</option>
+      <option value="'Courier New', Courier, monospace">Courier New</option>
+      <option value="Georgia, 'Times New Roman', Times, serif">Georgia</option>
+      <option value="Verdana, Geneva, Tahoma, sans-serif">Verdana</option>
+      <option value="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Segoe UI</option>
+      <option value="monospace">Monospace</option>
+    </select>
+
+    <input type="text" value="Heading" id="divyy" oninput="haha()">
+  </div>
+
+  <textarea id="inputs" oninput="haha()"></textarea>
+
+  <div id="bad">
+        <label for="colorPicker" class = "hidden">Color:</label>
+    <input type="color" class = "hidden" id="colorPicker" value="#4a00e0" onchange="setColor()">
+    <p id="charCount">Characters: 0</p>
+    <p id="charCountheading">Characters of heading: 0</p>
+  </div>
+
+  <p id="totalchar">Total Characters: 0</p>
+
+  <button id="onm2" onclick="resetForm()">Reset</button>
+  <button id="onm" onclick="window.print()">Print / Save as PDF</button>
+</div>
+</body>
+</html>
